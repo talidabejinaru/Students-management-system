@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {% if current_user.is_authenticated  %}
+    Student
+  {% else %}
+    eSTUD
+  {% endif %}
+{% endblock title %}
+
+{% block logo %}
+    <a href="/student" class="scrollto">eSTUD</a>
+{% endblock logo %}
+
+{% block header %}
+  {% if current_user.is_authenticated  %}
+    <li><a href="/studentinfo">Personal Info</a></li>
+    <li class="buy-tickets"><a href="/logout">Logout</a></li>
+  {% else %}          
+    <li><a href="/login">Login</a></li>
+  {% endif %}
+{% endblock header %}
+
+{% block intro %}
+  <!-- ======= Intro Section ======= -->
+  <section id="intro">
+    <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+      {% if current_user.is_authenticated  %}
+        <h1 class="mb-4 pb-0"> STUDENT PAGE </span> </h1>
+      {% endif %}
+    </div>
+  </section> <!-- End Intro Section -->
+{% endblock intro %}

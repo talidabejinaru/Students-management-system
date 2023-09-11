@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+Series Details
+{% endblock title %}
+
+{% block logo %}
+    <a href="/administrator" class="scrollto">eSTUD</a>
+{% endblock logo %}
+
+{% block header %}
+{% if current_user.is_authenticated  %}
+<li><a href="/administrator">Back</a></li>
+<li><a href="/addseries">Add Series</a></li>
+<li class="buy-tickets"><a href="/logout">Logout</a></li>
+{% endif %}
+
+
+{% endblock header %}
+
+
+
+{% block intro %}
+
+
+  <!-- ======= Intro Section ======= -->
+  <section id="intro">
+    <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+      <h2 style="color:rgb(14, 68, 72);-webkit-text-stroke: 0.4px #fff; font-size: 45px;" class="text-center"><span><b><b>Series Details</b></b></span> </h2>
+        
+      {% with messages=get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+
+      <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+          {{message}}
+
+
+      </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      <br>
+
+
+      <table style="font-size: 25px" class="table text-white">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">SERIES NAME</th>
+            <th scope="col">GROUPS</th>
+            <th scope="col">DELETE</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        {% for post in query %}
+          <tr>
+            <th scope="row">{{post.id}}</th>
+            <td>{{post.name}}</td>
+            <td><a href="/{{post.name}}"><button class="btn btn-primary">Groups Details</button></a></td>
+          <td><a href="/deleteseries/{{post.id}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-danger">Delete </button> </a> </td>
+          </tr>
+        {% endfor %}
+        
+        </tbody>
+      </table>
+    </div>
+  </section> <!-- End Intro Section -->
+
+{% endblock intro %}
+
